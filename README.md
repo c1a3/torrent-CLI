@@ -6,7 +6,7 @@ A simple command-line torrent client written in Go, utilizing the `anacrolix/tor
 
 - Download files from `.torrent` files.
 - Display torrent details (name, size, and save location).
-- Real-time progress monitoring (percentage, downloaded size, and active peers).
+- Real-time progress monitoring (percentage, downloaded size, and active peers). 
 - Human-readable file size formatting (B, KB, MB, GB, TB).
 
 ## Prerequisites
@@ -124,4 +124,4 @@ This project is licensed under the MIT License. See the LICENSE file for details
 - Inspired by the need for a simple, lightweight torrent client in Go.
 
 ## Note
-This project still requires some UI/UX changed within the CLI. Additional measures for error handling are also required to be added.
+This project still requires some UI/UX changed within the CLI. Additional measures for error handling are also required to be added. 
