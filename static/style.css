@@ -1,0 +1,164 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { 
+    height: 100%; 
+    overflow: hidden; 
+    background: #000; 
+}
+
+body {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #00ff41;
+    text-shadow: 0 0 5px rgba(0, 255, 65, 0.5), 0 0 10px rgba(0, 255, 65, 0.2);
+    /* Screen flickering wihle loading */
+    animation: flicker 0.5s ease-in-out;
+}
+
+::selection {
+    background: rgba(0, 255, 65, 0.25);
+    color: #00ff41;
+}
+
+#terminal {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+    background: #0a0a0a;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.1) inset;
+    overflow: hidden;
+    z-index: 1;
+}
+
+#terminal-output {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    white-space: pre-wrap;
+    word-break: break-all;
+    padding-bottom: 10px;
+    scroll-behavior: smooth;
+}
+
+/* scrollbar */
+#terminal-output::-webkit-scrollbar {
+    width: 6px;
+}
+#terminal-output::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+#terminal-output::-webkit-scrollbar-thumb {
+    background: #00aa2a;
+    border-radius: 3px;
+}
+
+#input-line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0, 255, 65, 0.2);
+    flex-shrink: 0;
+}
+
+.prompt {
+    color: #00aa2a;
+    white-space: nowrap;
+    margin-right: 8px;
+}
+
+#command-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #00ff41;
+    font-family: inherit;
+    font-size: inherit;
+    caret-color: #00ff41;
+    text-shadow: inherit;
+}
+
+#command-input::placeholder {
+    color: rgba(0, 255, 65, 0.3);
+}
+
+/* Visual Effects */
+#scanlines {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 10;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15) 0px,
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+}
+
+#drop-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 255, 65, 0.15);
+    border: 4px dashed #00ff41;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    backdrop-filter: blur(2px);
+}
+
+#drop-overlay.active {
+    opacity: 1;
+}
+
+#drop-overlay div {
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 0 0 20px #00ff41;
+    animation: blink 1.5s infinite;
+}
+
+/* Output colors */
+.output-line {
+    margin-bottom: 2px;
+}
+.output-line.error { color: #ff0040; text-shadow: 0 0 5px rgba(255, 0, 64, 0.5); }
+.output-line.warning { color: #ffb000; text-shadow: 0 0 5px rgba(255, 176, 0, 0.5); }
+.output-line.info { color: #00d4ff; text-shadow: 0 0 5px rgba(0, 212, 255, 0.5); }
+.output-line.success { color: #00ff41; }
+.output-line.dim { color: #00aa2a; text-shadow: none; }
+.output-line.command { color: #00ff41; margin-top: 10px; margin-bottom: 5px; }
+.progress-line { color: #00d4ff; }
+
+/* anims */
+@keyframes flicker {
+    0% { opacity: 0.8; }
+    5% { opacity: 0.5; }
+    10% { opacity: 0.9; }
+    15% { opacity: 0.4; }
+    20% { opacity: 1; }
+    25% { opacity: 0.7; }
+    30% { opacity: 1; }
+    100% { opacity: 1; }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    body { font-size: 12px; }
+    #terminal { padding: 10px; padding-bottom: 20px; }
+    #drop-overlay div { font-size: 2rem; text-align: center; padding: 20px; }
+}
