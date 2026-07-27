@@ -13,7 +13,7 @@ import (
 func main() {
 	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 	log.Println("╔══════════════════════════════════════╗")
-	log.Println("║   TorrentWeb — Starting Server...    ║")
+	log.Println("║         Starting Server...   	    ║")
 	log.Println("╚══════════════════════════════════════╝")
 
 	// Determine port (Render injects PORT env var)
