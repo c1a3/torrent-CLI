@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: torrent-web
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: PORT
+        value: "10000"
+      - key: DOWNLOAD_DIR
+        value: "/tmp/downloads"
+      - key: MAX_TORRENTS
+        value: "3"
